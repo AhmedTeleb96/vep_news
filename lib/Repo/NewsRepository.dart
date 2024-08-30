@@ -1,6 +1,24 @@
+import 'dart:convert';
+
 import '../Model/NewsArticle.dart';
+import 'package:http/http.dart' as http;
 
 class NewsRepository {
+
+  final String _apiKey = 'deaf9ec778224c868a2e0e977d751a44';
+  final String _baseUrl = 'https://newsapi.org/v2/top-headlines';
+
+  Future<List<NewsArticle>> fetchTopHeadlines({String country = 'us'}) async {
+    final response = await http.get(Uri.parse('$_baseUrl?country=$country&apiKey=$_apiKey'));
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+
+      return (data['articles'] as List).map((json) => NewsArticle.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load news');
+    }
+  }
 
   Future<List<NewsArticle>> fetchNews() async {
     List<NewsArticle> articles = [];

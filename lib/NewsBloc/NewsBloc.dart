@@ -15,8 +15,8 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
   Future<void> _onFetchNews(FetchNews event, Emitter<NewsState> emit) async {
     emit(NewsLoading());
     try {
-      await Future.delayed(const Duration(seconds: 2));
-      final articles = await newsRepository.fetchNews();
+      // await Future.delayed(const Duration(seconds: 10));
+      final articles = await newsRepository.fetchTopHeadlines();
       emit(NewsLoaded(articles));
     } catch (e) {
       emit(const NewsError('Could not fetch news'));

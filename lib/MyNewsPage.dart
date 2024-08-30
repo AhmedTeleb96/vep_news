@@ -23,11 +23,11 @@ class MyNewsPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 final article = state.articles[index];
                 return ListTile(
-                  leading: article.urlToImage != null
-                      ? Image.network(article.urlToImage)
-                      : null,
+                  leading:  article.urlToImage != null
+                      ? Image.network(article.urlToImage!)
+                      : Image.network('https://fastly.picsum.photos/id/870/200/300.jpg?blur=2&grayscale&hmac=ujRymp644uYVjdKJM7kyLDSsrqNSMVRPnGU99cKl6Vs'),
                   title: Text(article.title),
-                  subtitle: Text(article.description),
+                  subtitle: Text(article.description ?? 'No description available.'),
                 );
               },
             );
