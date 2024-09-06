@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vep_news/SharedPreferencesUtils.dart';
 import 'NewsBloc/NewsBloc.dart';
 import 'NewsBloc/NewsEvent.dart';
 import 'NewsBloc/NewsState.dart';
 
 class MyNewsPage extends StatelessWidget {
-  const MyNewsPage({super.key});
+   MyNewsPage();
+
+  final userName = SharedPreferencesUtils.loadStringValue("userName");
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('News'),
+        title: Text('welcome $userName'),
       ),
       body: BlocBuilder<NewsBloc, NewsState>(
         builder: (context, state) {
